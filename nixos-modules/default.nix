@@ -84,7 +84,7 @@ in
 
     boot.loader.efi.canTouchEfiVariables = lib.mkIf cfg.bootloader.recommendedOptions false;
 
-    boot.kernelParams = lib.mkIf cfg.notch.enable [ "apple_dcp.show_notch=1" ];
+    boot.kernelParams = lib.mkIf cfg.notch.enable [ "appledrm.show_notch=1" ];
 
     boot.extraModprobeConfig = lib.mkIf cfg.modprobeHidOptions.enable ''
       options hid_apple iso_layout=0
