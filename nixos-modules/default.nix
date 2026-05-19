@@ -77,6 +77,19 @@ in
   };
 
   config = lib.mkIf cfg.enable {
+    nixpkgs.overlays = [
+      (final: prev: {
+        aquamarine = prev.aquamarine.overrideAttrs {
+          src = prev.fetchFromGitHub {
+            owner = "hyprwm";
+            repo = "aquamarine";
+            rev = "ab2b0af63fbc9fb779d684f19149b790978be8a8";
+            hash = "sha256-TclWRW2SdFeETLaiTG4BA8C8C4m/LppQEldncqyTzAQ=";
+          };
+        };
+      })
+    ];
+
     hardware.asahi = {
       enable = true;
       peripheralFirmwareDirectory = cfg.peripheralFirmwareDirectory;
