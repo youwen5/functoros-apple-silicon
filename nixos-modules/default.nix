@@ -82,6 +82,19 @@ in
       peripheralFirmwareDirectory = cfg.peripheralFirmwareDirectory;
     };
 
+    nixpkgs.overlays = [
+      (final: prev: {
+        aquamarine = prev.aquamarine.overrideAttrs {
+          src = prev.fetchFromGitHub {
+            owner = "hyprwm";
+            repo = "aquamarine";
+            rev = "ab2b0af63fbc9fb779d684f19149b790978be8a8";
+            hash = "sha256-TclWRW2SdFeETLaiTG4BA8C8C4m/LppQEldncqyTzAQ=";
+          };
+        };
+      })
+    ];
+
     boot.loader.efi.canTouchEfiVariables = lib.mkIf cfg.bootloader.recommendedOptions false;
 
     boot.kernelParams = lib.mkIf cfg.notch.enable [ "appledrm.show_notch=1" ];
