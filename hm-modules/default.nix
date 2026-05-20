@@ -23,12 +23,4 @@ in
       '';
     };
   };
-
-  config = lib.mkIf cfg.enable {
-    functorOS.desktop = lib.mkIf cfg.notch.customizations {
-      hyprland.screenlocker.monitor = lib.mkDefault "eDP-1";
-      hyprland.screenlocker.useCrashFix = true;
-      waybar.variant = "compact";
-    };
-  };
 }

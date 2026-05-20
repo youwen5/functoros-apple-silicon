@@ -43,8 +43,7 @@ You will need to import both the NixOS module and Home Manager module for best r
       end = 90;
     };
 
-    # enable the notch, and also some hyprland customizations tailored for it
-    # (only if HM module is imported).
+    # enable the notch
     notch.enable = true;
   };
 }
