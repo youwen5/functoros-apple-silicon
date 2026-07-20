@@ -57,7 +57,11 @@ in
         correct operation.
       '';
     };
-    binaryCache.enable = lib.mkEnableOption "enable the nixos-apple-silicon binary cache and trust its signing keys.";
+    binaryCache.enable =
+      lib.mkRemovedOptionModule [ "functorOS" "apple-silicon" "binaryCache" "enable" ]
+        ''
+          nixos-apple-silicon binary cache has been removed upstream. this option is deprecated.
+        '';
     battery.limit.start = lib.mkOption {
       type = lib.types.nullOr (lib.types.ints.between 1 100);
       default = null;
@@ -108,23 +112,16 @@ in
         (
           if (cfg.battery.limit.end == null) then
             ''
-              KERNEL=="macsmc-battery", SUBSYSTEM=="power_supply", ATTR{charge_control_start_threshold}="${builtins.toString cfg.battery.limit.start}"
+              KERNEL=="macsmc-battery", SUBSYSTEM=="power_supply", ATTR{charge_control_start_threshold}="${toString cfg.battery.limit.start}"
             ''
           else if (cfg.battery.limit.start == null) then
             ''
-              KERNEL=="macsmc-battery", SUBSYSTEM=="power_supply", ATTR{charge_control_end_threshold}="${builtins.toString cfg.battery.limit.end}""
+              KERNEL=="macsmc-battery", SUBSYSTEM=="power_supply", ATTR{charge_control_end_threshold}="${toString cfg.battery.limit.end}""
             ''
           else
             ''
-              KERNEL=="macsmc-battery", SUBSYSTEM=="power_supply", ATTR{charge_control_end_threshold}="${builtins.toString cfg.battery.limit.end}", ATTR{charge_control_start_threshold}="${builtins.toString cfg.battery.limit.start}"
+              KERNEL=="macsmc-battery", SUBSYSTEM=="power_supply", ATTR{charge_control_end_threshold}="${toString cfg.battery.limit.end}", ATTR{charge_control_start_threshold}="${toString cfg.battery.limit.start}"
             ''
         );
-
-    nix.settings = lib.mkIf cfg.binaryCache.enable {
-      substituters = [ "https://nixos-apple-silicon.cachix.org" ];
-      trusted-public-keys = [
-        "nixos-apple-silicon.cachix.org-1:8psDu5SA5dAD7qA0zMy5UT292TxeEPzIz8VVEr2Js20="
-      ];
-    };
   };
 }
