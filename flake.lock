@@ -21,15 +21,16 @@
         "nixpkgs": "nixpkgs"
       },
       "locked": {
-        "lastModified": 1787749944,
-        "narHash": "sha256-kJx0zNcW00CSRWHm0w1dhHBF+bNP89eW8ekdfN6pwqs=",
+        "lastModified": 1788381993,
+        "narHash": "sha256-8P1xFFUhCHQT8+MI4x9DW7jIaDgBPEdTCwCiR+m1ohM=",
         "owner": "nix-community",
         "repo": "nixos-apple-silicon",
-        "rev": "cae818c72b2138510334850a3ff435831703bd23",
+        "rev": "fb602d1f8c6d83dd652fecc3f468328f8864f0c1",
         "type": "github"
       },
       "original": {
         "owner": "nix-community",
+        "ref": "main",
         "repo": "nixos-apple-silicon",
         "type": "github"
       }
