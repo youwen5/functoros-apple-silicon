@@ -1,5 +1,5 @@
 {
-  inputs.nixos-apple-silicon.url = "github:nix-community/nixos-apple-silicon";
+  inputs.nixos-apple-silicon.url = "github:nix-community/nixos-apple-silicon/main";
 
   outputs =
     { nixos-apple-silicon, self }:
