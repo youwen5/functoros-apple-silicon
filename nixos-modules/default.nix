@@ -103,6 +103,15 @@ in
 
     boot.kernelParams = lib.mkIf cfg.notch.enable [ "appledrm.show_notch=1" ];
 
+    # Keep the kernel tools' private type headers compatible with newer arm64
+    # system headers, which use __u128 in ptrace and signal contexts.
+    boot.kernelPatches = [
+      {
+        name = "tools-int128-types";
+        patch = ./kernel-tools-int128.patch;
+      }
+    ];
+
     boot.extraModprobeConfig = lib.mkIf cfg.modprobeHidOptions.enable ''
       options hid_apple iso_layout=0
     '';
